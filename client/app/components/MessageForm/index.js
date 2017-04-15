@@ -15,10 +15,15 @@ class MessageForm extends Component {
     })
   }
 
+  onCancel() {
+    const { actions, message } = this.props
+    actions.toggleDisplayState(message.id)
+  }
+
   // メソッド定義
   render() {
     const { message } = this.props
-    const cancelButton = message ? <input type="button" value="キャンセル" /> : null
+    const cancelButton = message ? <input type="button" value="キャンセル" onClick={this.onCancel.bind(this)} /> : null
     return (
       <div>
         <textarea ref={(input) => { this.textMessage = input }} rows="4" cols="40" />
