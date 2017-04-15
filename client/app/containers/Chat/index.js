@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     const { chat, actions } = this.props
     return (
-      <MessageList messages={[]} />
+      <MessageList messages={chat} />
     )
   }
 }
