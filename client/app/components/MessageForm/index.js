@@ -4,15 +4,26 @@ import $ from 'jquery'
 // Componentはイベントが使える
 class MessageForm extends Component {
   onSubmit() {
-    const { actions } = this.props
-    $.ajax({
-      type: 'POST',
-      url: '/api/messages',
-      data: {
-        message: {text: this.textMessage.value}
-      },
-      success: ((data) => actions.addMessage(data))
-    })
+    const { actions, message } = this.props
+    if (message) {
+      $.ajax({
+        type: 'PATCH',
+        url: '/api/messages/' + message.id,
+        data: {
+          message: {text: this.textMessage.value}
+        },
+        success: ((data) => actions.updateMessage(data))
+      })
+    } else {
+      $.ajax({
+        type: 'POST',
+        url: '/api/messages',
+        data: {
+          message: {text: this.textMessage.value}
+        },
+        success: ((data) => actions.addMessage(data))
+      })
+    }
   }
 
   onCancel() {
