@@ -33,8 +33,8 @@ const chat = (state = '', action) => {
         }
       })
     case REMOVE_MESSAGE:
-      const remove_id = action.id
-      return state.filter((message) => message['id'] !== remove_id)
+      const removeId = action.id
+      return state.filter((message) => message['id'] !== removeId)
     default:
       return state
   }
