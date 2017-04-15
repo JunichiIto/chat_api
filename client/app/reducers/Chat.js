@@ -1,12 +1,40 @@
 import { combineReducers } from 'redux'
-import { HELLO_WORLD_NAME_UPDATE } from '../constants/chat'
+import { ADD_MESSAGE, CREATE_MESSAGE_LIST, TOGGLE_DISPLAY_STATE, UPDATE_MESSAGE, REMOVE_MESSAGE } from '../constants/chat'
 
-export const chatInitialState = {name: 'World'}
+export const chatInitialState = [{"id":2,"text":"message2"},{"id":1,"text":"message1"}]
 
 const chat = (state = '', action) => {
   switch (action.type) {
-    case HELLO_WORLD_NAME_UPDATE:
-      return {...state, name: action.text}
+    case TOGGLE_DISPLAY_STATE:
+      const id = action.id
+      return state.map((message) => {
+        if (message['id'] === id) {
+          message['displayState'] = !message['displayState']
+        }
+        return message
+      })
+    case CREATE_MESSAGE_LIST:
+      return action.messages.map((message) => {
+        message['displayState'] = true
+        return message
+      })
+    case ADD_MESSAGE:
+      const message = action.message
+      message['displayState'] = true
+      return [...state, message]
+    case UPDATE_MESSAGE:
+      const updatedMessage = action.message
+      return state.map((m) => {
+        if (m['id'] === updatedMessage['id']) {
+          updatedMessage['displayState'] = true
+          return updatedMessage
+        } else {
+          return m
+        }
+      })
+    case REMOVE_MESSAGE:
+      const removeId = action.id
+      return state.filter((message) => message['id'] !== removeId)
     default:
       return state
   }
