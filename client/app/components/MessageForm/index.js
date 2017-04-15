@@ -26,7 +26,7 @@ class MessageForm extends Component {
     const cancelButton = message ? <input type="button" value="キャンセル" onClick={this.onCancel.bind(this)} /> : null
     return (
       <div>
-        <textarea ref={(input) => { this.textMessage = input }} rows="4" cols="40" />
+        <textarea ref={(input) => { this.textMessage = input }} rows="4" cols="40" defaultValue={message ? message.text : ''} />
         {cancelButton}
         <input type="button" value={message ? '更新' : '登録'} onClick={this.onSubmit.bind(this)} />
       </div>
