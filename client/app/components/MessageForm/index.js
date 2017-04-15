@@ -31,26 +31,15 @@ class MessageForm extends Component {
     actions.toggleDisplayState(message.id)
   }
 
-  onRemove() {
-    const { actions, message } = this.props
-    $.ajax({
-      type: 'DELETE',
-      url: '/api/messages/' + message.id,
-      success: (() => actions.removeMessage(message.id))
-    })
-  }
-
   // メソッド定義
   render() {
     const { message } = this.props
     const cancelButton = message ? <input type="button" value="キャンセル" onClick={this.onCancel.bind(this)} /> : null
-    const removeButton = message ? <input type="button" value="削除" onClick={this.onRemove.bind(this)} /> : null
     return (
       <div>
         <textarea ref={(input) => { this.textMessage = input }} rows="4" cols="40" defaultValue={message ? message.text : ''} />
         {cancelButton}
         <input type="button" value={message ? '更新' : '登録'} onClick={this.onSubmit.bind(this)} />
-        {removeButton}
       </div>
     )
   }
