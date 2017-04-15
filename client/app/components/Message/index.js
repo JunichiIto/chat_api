@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-// var Message = function (props) {
-//   var text = props.text
-// }
+class Message extends Component {
+  onClick() {
+    const { actions, id } = this.props
+    actions.toggleDisplayState(id)
+  }
 
-const Message = ({text}) => {
-  // JSX = React importが必須
-  return (
-    <div>
-      {text}
-    </div>
-  )
+  render() {
+    const { text } = this.props
+    return (
+      <div onClick={this.onClick.bind(this)}>
+        {text}
+      </div>
+    )
+  }
 }
 
 export default Message

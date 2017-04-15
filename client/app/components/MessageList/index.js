@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
 import Message from '../Message'
+import MessageForm from '../MessageForm'
 
 class MessageList extends Component {
   componentDidMount() {
@@ -12,13 +13,21 @@ class MessageList extends Component {
     })
   }
 
+  renderMessage(actions, message) {
+    return (
+      message.displayState ?
+        <Message key={message.id} actions={actions} {...message} /> :
+        <MessageForm key={message.id} message={message} actions={actions} />
+    )
+  }
+
   render() {
-    const { messages } = this.props
+    const { messages, actions } = this.props
     return (
       <div>
         {
           messages.map((message) =>
-            <Message key={message.id} text={message.text} />
+            this.renderMessage(actions, message)
           )
         }
       </div>

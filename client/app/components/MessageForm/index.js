@@ -17,10 +17,13 @@ class MessageForm extends Component {
 
   // メソッド定義
   render() {
+    const { message } = this.props
+    const cancelButton = message ? <input type="button" value="キャンセル" /> : null
     return (
       <div>
         <textarea ref={(input) => { this.textMessage = input }} rows="4" cols="40" />
-        <input type="button" value="登録" onClick={this.onSubmit.bind(this)} />
+        {cancelButton}
+        <input type="button" value={message ? '更新' : '登録'} onClick={this.onSubmit.bind(this)} />
       </div>
     )
   }
