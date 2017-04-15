@@ -34,13 +34,7 @@ const chat = (state = '', action) => {
       })
     case REMOVE_MESSAGE:
       const remove_id = action.id
-      const ret = []
-      state.forEach((message) => {
-        if (message['id'] !== remove_id) {
-          ret.push(message)
-        }
-      })
-      return ret
+      return state.filter((message) => message['id'] !== remove_id)
     default:
       return state
   }
