@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_MESSAGE, CREATE_MESSAGE_LIST, TOGGLE_DISPLAY_STATE, UPDATE_MESSAGE } from '../constants/chat'
+import { ADD_MESSAGE, CREATE_MESSAGE_LIST, TOGGLE_DISPLAY_STATE, UPDATE_MESSAGE, REMOVE_MESSAGE } from '../constants/chat'
 
 export const chatInitialState = [{"id":2,"text":"message2"},{"id":1,"text":"message1"}]
 
@@ -32,6 +32,15 @@ const chat = (state = '', action) => {
           return m
         }
       })
+    case REMOVE_MESSAGE:
+      const remove_id = action.id
+      const ret = []
+      state.forEach((message) => {
+        if (message['id'] !== remove_id) {
+          ret.push(message)
+        }
+      })
+      return ret
     default:
       return state
   }

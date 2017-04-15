@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, CREATE_MESSAGE_LIST, TOGGLE_DISPLAY_STATE, UPDATE_MESSAGE } from '../constants/chat'
+import { ADD_MESSAGE, CREATE_MESSAGE_LIST, TOGGLE_DISPLAY_STATE, UPDATE_MESSAGE, REMOVE_MESSAGE } from '../constants/chat'
 
 // message: messageになる
 export const addMessage = (message) => ({
@@ -19,4 +19,9 @@ export const toggleDisplayState = (id) => ({
 export const updateMessage = (message) => ({
   type: UPDATE_MESSAGE,
   message,
+})
+
+export const removeMessage = (id) => ({
+  type: REMOVE_MESSAGE,
+  id,
 })
