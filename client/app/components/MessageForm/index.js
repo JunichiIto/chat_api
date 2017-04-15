@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
+import $ from 'jquery'
 
 // Componentはイベントが使える
 class MessageForm extends Component {
   onSubmit() {
     const { actions } = this.props
-    actions.addMessage(this.textMessage.value)
+    $.ajax({
+      type: 'POST',
+      url: '/api/messages',
+      data: {
+        message: {text: this.textMessage.value}
+      },
+      success: ((data) => actions.addMessage(data))
+    })
   }
 
   // メソッド定義
